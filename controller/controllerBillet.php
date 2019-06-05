@@ -5,7 +5,7 @@ require_once 'model/billet.php';
 //require_once 'model/commentaires.php';
 require_once 'view/viewClass.php';
 
-class ControleurBillet {
+class controleurBillet {
 
 	private $billet;
 	private $commentaire;

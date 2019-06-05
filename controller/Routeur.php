@@ -12,8 +12,8 @@ class Routeur {
 	private $ctrlAdmin;
 
 	public function __construct() {
-		//$this->ctrlAccueil = new ControleurAccueil();
-		$this->ctrlBillet = new ControleurBillet();
+		$this->ctrlAccueil = new controleurAccueil();
+		$this->ctrlBillet = new controleurBillet();
 		
 			
 		//$this->ctrlAdmin = new ControleurAdmin();
