@@ -15,10 +15,10 @@
 	
 	<div class="wrapper">
 		<header class="box">
-		  <h1 class="commentTitle">Il y a <?= $commentNumber['nbcomments'] ?> commentaires pour <?= $billet['titre'] ?></h1>
+		  <h1 class="commentTitle">Il y a <?= $totalCommentaires['nbcomments'] ?> commentaires pour <?= $billet['titre'] ?></h1>
 		</header>
 
-		<?php foreach ($commentairest as $commentaire): ?>
+		<?php foreach ($commentaires as $commentaire): ?>
 		<div class="comment box">
 		  <div class="commentInfo"><b><?= htmlspecialchars($commentaire['auteur']) ?></b> posté le <?= $commentaire['date_fr'] ?> 
 			<form method="post" action="index.php?action=signaler">
@@ -40,7 +40,7 @@
 		</div>
 		<?php endforeach; ?>
 		<header class="box">
-			<h2 class="commentTitle">Laissez moi un petit message !</h2>
+			<h2 class="commentTitle">Laissez-moi un commentaire !</h2>
 		</header>
 		<form id="commentform" method="post" action="index.php?action=commenter">
 			<div class="form-bloc">
