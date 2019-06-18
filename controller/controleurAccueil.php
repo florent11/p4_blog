@@ -3,7 +3,6 @@
 require_once 'model/billet.php';
 require_once 'view/viewClass.php';
 
-
 class controleurAccueil {
 
   private $billet;
