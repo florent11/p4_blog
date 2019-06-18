@@ -1,3 +1,4 @@
+<?php ini_set('display_errors', 'on')?>
 <?php $this->titre = "Blog Alaska : Accueil"; ?>
 
 
@@ -7,14 +8,14 @@
 		<article class="billet box">
 			<header>
 				<a href="<?= "index.php?action=billet&id=" . $billet['id'] ?>">
-					<h2 class="postTitle"><?= $billet['titre'] ?></h1>
+					<h2 class="postTitle"><?= $billet['bil_titre'] ?></h1>
 				</a>
 				<div class="timeinfo">
-					<time><i>Le <?= $billet['date_fr'] ?></i></time>
+					<time><i>Le <?= $billet['bil_date'] ?></i></time>
 				</div>
 			</header>
 			<div class="wrapper">
-				<p><?= $billet['contenu'] ?></p>
+				<p><?= $billet['bil_contenu'] ?></p>
 			</div>
 		</article>
 	</div>

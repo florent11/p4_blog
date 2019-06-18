@@ -1,9 +1,9 @@
 <?php
 
-//*require_once 'controller/ControleurAccueil.php'; 
+require_once 'controller/controleurAccueil.php'; 
 require_once 'controllerBillet.php';
 //*require_once 'controller/ControleurAdmin.php';
-//*require_once '../view/viewClass.php'; 
+require_once 'view/viewClass.php'; 
 
 class Routeur {
 
@@ -116,7 +116,7 @@ class Routeur {
 				}
 			}
 			else { // Aucune action definie : affichage de l'accueil
-			//	$this->ctrlAccueil->accueil();
+				$this->ctrlAccueil->accueil();
 			}
 		}
 			catch (Exception $e) {
