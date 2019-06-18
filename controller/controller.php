@@ -7,9 +7,8 @@ function accueil()
 {
 	$modelBillet = new Billet;
 	$billets = $modelBillet->getBillets();
-	//require 'view/view.php'; 
+	require 'view/viewHome.php'; 
 }
-accueil();
 
 // Affiche les details sur un billets
 function billet($idBillet)
@@ -25,5 +24,5 @@ function billet($idBillet)
 // Affiche une erreur
 function erreur($msgErreur)
 {
-	//require 'view/errorView.php';
+	require 'view/viewError.php';
 }
