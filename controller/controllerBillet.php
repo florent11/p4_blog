@@ -1,8 +1,7 @@
 <?php
 
 require_once 'model/billet.php';
-
-//require_once 'model/commentaires.php';
+require_once 'model/commentaires.php';
 require_once 'view/viewClass.php';
 
 class controleurBillet {
@@ -12,17 +11,17 @@ class controleurBillet {
 
 	public function __construct() {
 		$this->billet = new Billet();
-		//$this->commentaire = new Commentaire();
+		$this->commentaire = new Commentaire();
 	}
 
 	// Affiche les détails sur un billet
 	public function billet($idBillet) {
 		$billet = $this->billet->getBillet($idBillet);
-		//$commentaires = $this->commentaire->getCommentaires($idBillet);
-		//$commentNumber = $this->commentaire->countComments($idBillet);
+		$commentaires = $this->commentaire->getCommentaires($idBillet);
+		$commentNumber = $this->commentaire->countComments($idBillet);
 
 		$vue = new View("Billet");
-		$vue->generer(array('billet' => $billet));
+		$vue->generer(array('billet' => $billet, 'commentaires'=>$commentaires, 'totalCommentaires'=>$commentNumber));
 	}
   
 	// Ajoute un commentaire
