@@ -1,4 +1,3 @@
-<?php ini_set('display_errors', 'on')?>
 <?php $this->titre = "Blog Alaska : Accueil"; ?>
 
 
