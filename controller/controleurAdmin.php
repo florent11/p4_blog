@@ -80,4 +80,77 @@ class ControleurAdmin {
 			}
 		}
 		return $connexion;
+    }
+    
+    public function displayAdmin($order) {
+		if(isset($_SESSION['userId'])){
+			$commentaires = $this->administration->getSignCom();
+			$commentnbr = $this->administration->countSignCom();
+			// $admin = $this->administration->getAccountInfo($username);
+				
+			// Billets Croissant / Decroissant
+			// $sortPost = "desc";
+			$_SESSION['sort'] = $order;
+			if($_SESSION['sort'] == 'desc') {
+				$billets = $this->billet->getBillets();
+				} else {
+				$billets = $this->billet->getBilletsAsc();
+			}
+			// Generation vue.
+			$vue = new View("Admin");
+			$vue->generer(array('admin' => $_SESSION['userId'], 'billets' => $billets, 'commentaires' => $commentaires, 'signComNbr' => $commentnbr));
+		} else {
+			header('Location: index.php');
+		}
 	}
+	
+	
+	// Afficher commentaire signalés panel Admin
+	public function displaySignCom(){
+		$commentaires = $this->administration->getSignCom();
+	}
+	
+	//-- Modération --//
+
+	
+	// Moderer commentaire
+	public function moderateCom($contenus, $idCommentaire){
+		$this->administration->insertLogs($idCommentaire);
+		$this->administration->insertLogsMod($idCommentaire);
+		$this->administration->modSignCom($contenus, $idCommentaire);
+		header('Location: index.php?action=administration&sort=desc');
+	}
+	
+	// Suppression commentaire
+	public function suppressCom($idCommentaire){
+		$this->administration->insertLogs($idCommentaire);
+		$this->administration->insertLogsSupp($idCommentaire);
+		$this->administration->suppressCom($idCommentaire);
+		header('Location: index.php?action=administration&sort=desc');
+	}
+	
+	
+	//--- CRUD ---//
+	// Creation Billet
+	public function create($title, $content)
+	{
+		$this->administration->create($title, $content);
+		header('Location: index.php?action=administration&sort=desc');
+	}
+	
+	// Suppression Billet
+	public function suppress($idBillet)
+	{
+		$this->administration->suppress($idBillet);
+		header('Location: index.php?action=administration&sort=desc');
+	}
+	
+	// Modification Billet
+	public function update($idBillet, $titreBillet, $contenuBillet)
+	{
+		$this->administration->update($idBillet, $titreBillet, $contenuBillet);
+		header('Location: index.php?action=administration&sort=desc');
+	}
+		
+
+}
