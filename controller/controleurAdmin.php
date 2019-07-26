@@ -1,10 +1,10 @@
 <?php 
+ini_set('display_errors', 'on');
+require_once 'model/billet.php';
+require_once 'model/admin.php';
+require_once 'view/viewClass.php';
 
-require_once '../model/billet.php';
-require_once '../model/admin.php';
-require_once '../view/viewClass.php';
-
-class ControleurAdmin {
+class controleurAdmin {
 
 	private $signCom;
 
@@ -83,15 +83,15 @@ class ControleurAdmin {
     }
     
     public function displayAdmin($order) {
-		if(isset($_SESSION['userId'])){
+	//	if(isset($_SESSION['userId'])){
 			$commentaires = $this->administration->getSignCom();
 			$commentnbr = $this->administration->countSignCom();
 			// $admin = $this->administration->getAccountInfo($username);
 				
 			// Billets Croissant / Decroissant
-			// $sortPost = "desc";
+			$sortPost = "desc";
 			$_SESSION['sort'] = $order;
-			if($_SESSION['sort'] == 'desc') {
+			if($order == 'desc') {
 				$billets = $this->billet->getBillets();
 				} else {
 				$billets = $this->billet->getBilletsAsc();
@@ -99,9 +99,9 @@ class ControleurAdmin {
 			// Generation vue.
 			$vue = new View("Admin");
 			$vue->generer(array('admin' => $_SESSION['userId'], 'billets' => $billets, 'commentaires' => $commentaires, 'signComNbr' => $commentnbr));
-		} else {
-			header('Location: index.php');
-		}
+	//	} else {
+			//header('Location: index.php');
+		//}
 	}
 	
 	
