@@ -1,22 +1,23 @@
 <?php
 
-require_once 'controller/controleurAccueil.php'; 
+require_once 'controleurAccueil.php'; 
 require_once 'controllerBillet.php';
-//*require_once 'controller/ControleurAdmin.php';
-require_once 'view/viewClass.php'; 
+require_once 'controleurAdmin.php';
+require_once 'view/viewClass.php';
+require_once 'ctrlAdminRegister.php'; 
 
 class Routeur {
 
 	private $ctrlAccueil;
 	private $ctrlBillet;
 	private $ctrlAdmin;
+	private $ctrlAdminRegister;
 
 	public function __construct() {
 		$this->ctrlAccueil = new controleurAccueil();
 		$this->ctrlBillet = new controleurBillet();
-		
-			
-		//$this->ctrlAdmin = new ControleurAdmin();
+		$this->ctrlAdmin = new controleurAdmin();
+		$this->ctrlAdminRegister = new ctrlAdminRegister();
 	}
 
 	// Traite une requête entrante
@@ -53,9 +54,9 @@ class Routeur {
 							$this->ctrlAdmin->deconnexion();
 						break;
 						
-						case 'administration':
-							$order = $this->getParametre($_GET, 'sort');
-							$this->ctrlAdmin->displayAdmin($order);
+						case 'admin':
+						$order = $this->getParametre($_GET, 'sort');
+						$this->ctrlAdmin->displayAdmin($order);
 						break;
 						
 						case 'connexionAdmin':
@@ -111,8 +112,19 @@ class Routeur {
 							$this->ctrlAdmin->suppressCom($idCom);
 						break;
 						
+						case 'adminregistration':
+							$name = $this->getParametre($_POST, 'nom');
+							$pass = $this->getParametre($_POST, 'password');
+							$this->ctrlAdminRegister->registration($name, $pass);
+						break;
+
+						case 'registration':
+							$this->ctrlAdminRegister->createFormView();
+						break;
+							
 						default:
 							throw new Exception("Action non valide");
+						
 				}
 			}
 			else { // Aucune action definie : affichage de l'accueil
@@ -130,7 +142,6 @@ class Routeur {
 		$vue->generer(array('msgErreur' => $msgErreur));
 	}
 	  
-	  
 	// Recherche un paramètre dans un tableau
 	private function getParametre($tableau, $nom) {
 		if (isset($tableau[$nom])) {
@@ -138,5 +149,5 @@ class Routeur {
 		} else
 			throw new Exception("Parametre '$nom' absent");
 	}
-  
+
 }
