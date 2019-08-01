@@ -53,10 +53,13 @@ class Routeur {
 						case 'deconnexion':
 							$this->ctrlAdmin->deconnexion();
 						break;
+
+						case 'connexion':
+							$this->ctrlAdmin->connexion();
+						break;
 						
 						case 'admin':
-						$order = $this->getParametre($_GET, 'sort');
-						$this->ctrlAdmin->displayAdmin($order);
+						$this->ctrlAdmin->displayAdmin();
 						break;
 						
 						case 'connexionAdmin':
@@ -66,8 +69,7 @@ class Routeur {
 								$this->ctrlAdmin->displayAdmin($order);
 							} else {
 								throw new Exception("Erreur de connexion");
-							}
-							
+							}	
 						break;
 						
 						case 'creer':
@@ -111,16 +113,19 @@ class Routeur {
 							$idCom = $this->getParametre($_GET, 'id');
 							$this->ctrlAdmin->suppressCom($idCom);
 						break;
-						
+
+						case 'registration':
+							$this->ctrlAdminRegister->createFormView();
+
+						break;
+
 						case 'adminregistration':
 							$name = $this->getParametre($_POST, 'nom');
 							$pass = $this->getParametre($_POST, 'password');
 							$this->ctrlAdminRegister->registration($name, $pass);
 						break;
 
-						case 'registration':
-							$this->ctrlAdminRegister->createFormView();
-						break;
+						
 							
 						default:
 							throw new Exception("Action non valide");
