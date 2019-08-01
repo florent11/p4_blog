@@ -48,7 +48,6 @@ class controleurAdmin {
     
     public function admin() {
 		if(isset($_SESSION['userId'])) {
-		
 			$commentaires = $this->administration->getSignCom();
 			$billets = $this->billet->getBillets();
 			// Generation vue.
@@ -68,9 +67,7 @@ class controleurAdmin {
 			$username = ($_POST['username']);
 			$password = ($_POST['password']);
 			$admin = $this->administration->getAccountInfo($username);
-			// $pass_hache = password_hash($password, PASSWORD_DEFAULT); 
 			$isPassCorrect = password_verify($password, $admin['pass']);
-			// echo $isPassCorrect;
 			if($username == 'Admin' && $isPassCorrect) {
 			
 				$_SESSION['userId'] = $username;
@@ -82,7 +79,7 @@ class controleurAdmin {
 		return $connexion;
     }
     
-    public function displayAdmin($order) {
+    public function displayAdmin($order="desc") {
 	//	if(isset($_SESSION['userId'])){
 			$commentaires = $this->administration->getSignCom();
 			$commentnbr = $this->administration->countSignCom();
