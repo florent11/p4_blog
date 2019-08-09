@@ -5,17 +5,14 @@ require_once 'model.php';
 class Billet extends Model 
 {
 	// Renvoie la liste des billets du blog
-	public function getBillets()
+	public function getBillets($order = 'desc')
 	{
-		$sql = 'SELECT * from posts order by bil_id desc';
-		$billets = $this->executerRequete($sql);
-		return $billets->fetchAll();
-	}
-	
-	public function getBilletsAsc()
-	{
-		$sql = 'select bil_id  as id, DATE_FORMAT(BIL_DATE, \'%d/%m/%Y à %Hh%imin%ss\') 
-		AS date_fr, BIL_TITRE as titre, BIL_CONTENU as contenu from posts order by bil_id  asc';
+		if ($order == 'desc'){
+			$sql = 'SELECT * from posts order by bil_id desc';
+		} else {
+			$sql = 'SELECT * from posts order by bil_id asc';
+
+		}
 		$billets = $this->executerRequete($sql);
 		return $billets->fetchAll();
 	}
