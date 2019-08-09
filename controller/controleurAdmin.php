@@ -34,10 +34,9 @@ class controleurAdmin {
 	
 	// Afficher logs modération
 	public function logsView(){
-		$logsMod = $this->administration->getLogsBetterMod();
 		$logsDel = $this->administration->getLogsBetterDel();
 		$vue = new View("Logs");
-		$vue->generer(array("logsMod" => $logsMod, "logsDel" => $logsDel));
+		$vue->generer(array("logsDel" => $logsDel));
 	}
 	
 	public function deconnexion() {
@@ -68,9 +67,10 @@ class controleurAdmin {
 			$password = ($_POST['password']);
 			$admin = $this->administration->getAccountInfo($username);
 			$isPassCorrect = password_verify($password, $admin['pass']);
-			if($username == 'Admin' && $isPassCorrect) {
+			if($isPassCorrect) {
 			
-				$_SESSION['userId'] = $username;
+				$_SESSION['username'] = $username;
+				$_SESSION['userId'] = $admin['id'];
 				$connexion = true;
 			} else {
 				$connexion = false;
@@ -89,9 +89,9 @@ class controleurAdmin {
 			$sortPost = "desc";
 			$_SESSION['sort'] = $order;
 			if($order == 'desc') {
-				$billets = $this->billet->getBillets();
+				$billets = $this->billet->getBillets('desc');
 				} else {
-				$billets = $this->billet->getBilletsAsc();
+				$billets = $this->billet->getBillets('asc');
 			}
 			// Generation vue.
 			$vue = new View("Admin");
@@ -115,7 +115,7 @@ class controleurAdmin {
 		$this->administration->insertLogs($idCommentaire);
 		$this->administration->insertLogsMod($idCommentaire);
 		$this->administration->modSignCom($contenus, $idCommentaire);
-		header('Location: index.php?action=administration&sort=desc');
+		header('Location: index.php?action=admin&sort=desc');
 	}
 	
 	// Suppression commentaire
@@ -123,7 +123,7 @@ class controleurAdmin {
 		$this->administration->insertLogs($idCommentaire);
 		$this->administration->insertLogsSupp($idCommentaire);
 		$this->administration->suppressCom($idCommentaire);
-		header('Location: index.php?action=administration&sort=desc');
+		header('Location: index.php?action=admin&sort=desc');
 	}
 	
 	
@@ -132,21 +132,21 @@ class controleurAdmin {
 	public function create($title, $content)
 	{
 		$this->administration->create($title, $content);
-		header('Location: index.php?action=administration&sort=desc');
+		header('Location: index.php?action=admin&sort=desc');
 	}
 	
 	// Suppression Billet
 	public function suppress($idBillet)
 	{
 		$this->administration->suppress($idBillet);
-		header('Location: index.php?action=administration&sort=desc');
+		header('Location: index.php?action=admin&sort=desc');
 	}
 	
 	// Modification Billet
 	public function update($idBillet, $titreBillet, $contenuBillet)
 	{
 		$this->administration->update($idBillet, $titreBillet, $contenuBillet);
-		header('Location: index.php?action=administration&sort=desc');
+		header('Location: index.php?action=admin&sort=desc');
 	}
 		
 
