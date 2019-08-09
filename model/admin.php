@@ -87,8 +87,8 @@ Class Admin extends Model
 	// Creation Billet
 	public function create($titre, $content)
 	{
-		$sql = "INSERT INTO posts(BIL_DATE, BIL_TITRE, BIL_CONTENU) VALUES(NOW(), ?, ?)";
-		$this->executerRequete($sql, array($titre, $content));
+		$sql = "INSERT INTO posts(BIL_DATE, BIL_TITRE, BIL_CONTENU, AUTEUR_ID) VALUES(NOW(), ?, ?, ?)";
+		$this->executerRequete($sql, array($titre, $content, $_SESSION['userId']));
 	}
 	
 	// Suppression Billet

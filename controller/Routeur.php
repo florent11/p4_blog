@@ -59,12 +59,17 @@ class Routeur {
 						break;
 						
 						case 'admin':
-						$this->ctrlAdmin->displayAdmin();
+						if(isset($_GET['sort'])) {
+							$order = $this->getParametre($_GET, 'sort');
+						} else {
+							$order = "desc";
+						}
+						$this->ctrlAdmin->displayAdmin($order);
 						break;
 						
 						case 'connexionAdmin':
 							$connexion = $this->ctrlAdmin->connexionAdmin();
-							if($connexion){
+							 if($connexion){
 								$order = "desc";
 								$this->ctrlAdmin->displayAdmin($order);
 							} else {

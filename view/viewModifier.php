@@ -8,6 +8,6 @@
 	</form>
 	<div class="buttonRow">
 		<button class="button left" form="modifier_form">Modifier le Billet</button>
-		<a href="index.php?action=administration&sort=desc" class="button right">Retour Administration</a>
+		<a href="index.php?action=admin&sort=desc" class="button right">Retour Administration</a>
 	</div>
 </div>

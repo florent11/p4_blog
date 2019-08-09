@@ -10,8 +10,8 @@
 		<!-- Font Awesome CDN -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" integrity="sha256-39jKbsb/ty7s7+4WzbtELS4vq9udJ+MDjGTD5mtxHZ0=" crossorigin="anonymous" />
 		<!-- Tiny MCE -->
-		<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
-  		<script>tinymce.init({selector:'textarea'});</script>
+		<script src="public/tinymce/js/tinymce/tinymce.min.js"></script>
+		<script>tinymce.init({selector:'textarea'});</script>
 	</head>
 	<body>
 		<div id="container">
@@ -26,8 +26,8 @@
 				<div id="login">
 					<?php
 					if(isset($_SESSION['userId'])){
-						echo '<p><a href="index.php?action=administration&sort=desc" class="button-connexion" id="logintext">Administration</a></p>
-							<a href="index.php?action=administration&sort=desc" class="fas fa-tasks button-connexion" id="loginlogo"></a>
+						echo '<p><a href="index.php?action=admin&sort=desc" class="button-connexion" id="logintext">Administration</a></p>
+							<a href="index.php?action=admin&sort=desc" class="fas fa-tasks button-connexion" id="loginlogo"></a>
 							<p><a href="index.php?action=deconnexion" class="button-connexion" id="logintext">Deconnexion</a></p>
 							<a href="index.php?action=deconnexion" class="fas fa-sign-out-alt button-connexion" id="loginlogo"></a>';
 					}else {
@@ -42,7 +42,7 @@
 				</div>
 					
 			</div>
-				<?= $content ?> 
+				<?= $contenu ?> 
 			<footer>
 				Billet Simple pour l'Alaska, écrit par Jean Forteroche.
 			</footer>

@@ -20,9 +20,9 @@ Class View
 		$contenu = $this->genererFichier($this->fichier, $donnees);
 		// Génération du gabarit commun utilisant la partie spécifique
 		$vue = $this->genererFichier('view/template.php',
-		array('titre' => $this->titre, 'content' => $contenu));
+		array('titre' => $this->titre, 'contenu' => $contenu));
 		// Renvoi de la vue au navigateur
-		echo $contenu;
+		echo $vue;
 	}
 
 	// Génère un fichier vue et renvoie le résultat produit

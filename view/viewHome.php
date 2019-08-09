@@ -6,7 +6,7 @@
 	<div class="wrapper">
 		<article class="billet box">
 			<header>
-				<a href="<?= "index.php?action=billet&id=" . $billet['id'] ?>">
+				<a href="<?= "index.php?action=billet&id=" . $billet['bil_id'] ?>">
 					<h2 class="postTitle"><?= $billet['bil_titre'] ?></h1>
 				</a>
 				<div class="timeinfo">
