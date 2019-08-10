@@ -1,6 +1,5 @@
 <?php $this->titre = "Blog Alaska : Accueil"; ?>
 
-
 <div id="wrapper-home">
 	<?php foreach ($billets as $billet): ?>
 	<div class="wrapper">
