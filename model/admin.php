@@ -49,6 +49,16 @@ Class Admin extends Model
 		$logs = $this->executerRequete($sql);
 		return $logs->fetchAll();
 	}
+
+	// Liste historique commentaires Validés
+	public function getLogsBetterMod()
+	{
+		$sql ='SELECT logs.log_id as log_id, DATE_FORMAT(logs.com_date, \'%d/%m/%Y à %Hh%imin%ss\') as post_date_fr, comments.com_id as com_id, comments.COM_AUTEUR as author,
+		logs.com_content as oldcontent, comments.com_contenu as newcontent, DATE_FORMAT(logs.log_date, \'%d/%m/%Y à %Hh%imin%ss\') as mod_date_fr, comments.bil_id as post_id 
+		FROM logs INNER JOIN comments ON logs.com_id = comments.com_id WHERE logs.mod_type = "validated" ORDER BY log_id DESC';
+		$logsMod = $this->executerRequete($sql);
+		return $logsMod->fetchAll();
+	}
 	
 	// Nombre commentaire à moderer
 	public function countSignCom()
@@ -76,11 +86,17 @@ Class Admin extends Model
 		$sql ="INSERT INTO logs(com_id, com_date, com_author, com_content, post_id) 
 				SELECT com_id, com_date, com_auteur, com_contenu, bil_id FROM comments WHERE com_id = ?";
 		$this->executerRequete($sql, array($idCommentaire));
-	}
+	} 
 	
 	// Insertion type "Supprimé" log Modération
 	public function insertLogsSupp($idCommentaire){
 		$sql ="UPDATE logs SET mod_type = 'deleted' WHERE com_id = ?";
+		$this->executerRequete($sql, array($idCommentaire));
+	}
+
+	// Insertion type "Validé" log Modération
+	public function insertLogsMod($idCommentaire){
+		$sql ="UPDATE logs SET mod_type = 'validated' WHERE com_id = ?";
 		$this->executerRequete($sql, array($idCommentaire));
 	}
 	

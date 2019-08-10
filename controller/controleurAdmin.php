@@ -1,5 +1,4 @@
 <?php 
-ini_set('display_errors', 'on');
 require_once 'model/billet.php';
 require_once 'model/admin.php';
 require_once 'view/viewClass.php';
@@ -34,9 +33,10 @@ class controleurAdmin {
 	
 	// Afficher logs modération
 	public function logsView(){
+		$logsMod = $this->administration->getLogsBetterMod();
 		$logsDel = $this->administration->getLogsBetterDel();
 		$vue = new View("Logs");
-		$vue->generer(array("logsDel" => $logsDel));
+		$vue->generer(array("logsMod" => $logsMod, "logsDel" => $logsDel));
 	}
 	
 	public function deconnexion() {
@@ -80,10 +80,8 @@ class controleurAdmin {
     }
     
     public function displayAdmin($order="desc") {
-	//	if(isset($_SESSION['userId'])){
 			$commentaires = $this->administration->getSignCom();
 			$commentnbr = $this->administration->countSignCom();
-			// $admin = $this->administration->getAccountInfo($username);
 				
 			// Billets Croissant / Decroissant
 			$sortPost = "desc";
@@ -96,9 +94,6 @@ class controleurAdmin {
 			// Generation vue.
 			$vue = new View("Admin");
 			$vue->generer(array('admin' => $_SESSION['userId'], 'billets' => $billets, 'commentaires' => $commentaires, 'signComNbr' => $commentnbr));
-	//	} else {
-			//header('Location: index.php');
-		//}
 	}
 	
 	
@@ -110,7 +105,7 @@ class controleurAdmin {
 	//-- Modération --//
 
 	
-	// Moderer commentaire
+	// Moderer commentaire (Valider un commentaire signalé)
 	public function moderateCom($contenus, $idCommentaire){
 		$this->administration->insertLogs($idCommentaire);
 		$this->administration->insertLogsMod($idCommentaire);

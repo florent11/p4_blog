@@ -1,4 +1,3 @@
-<?php ini_set('display_errors', 'on') ?>
 <?php $this->titre = "Blog Alaska - Administration"; ?>
 
 <div id="wrapper-admin">
@@ -25,7 +24,7 @@
 				<a href="<?= "index.php?action=billet&id=" . $billet['bil_id'] ?>">
 					<h3><?= $billet['bil_titre'] ?></h3>
 				</a>
-				<!-- <i class="fas fa-comments"></i> -->
+				
 				<div class="buttonAdmin">
 					<a href="<?= "index.php?action=vueModifier&id=" . $billet['bil_id'] ?>" title="Modifier Billet" class="fas fa-pen-square"></a>
 					<a href="<?= "index.php?action=supprimer&id=" . $billet['bil_id'] ?>" title="Supprimer Billet" class="fas fa-trash"></a>
@@ -74,8 +73,9 @@
 			<div class="editcom">
 				<form method="post" class="editform" action="index.php?action=moderer">
 					<input type="hidden" name="cid" value="<?= $signComs['com_id'] ?>" />
-					<textarea cols="40" rows="5" name="modCom" placeholder="Editer Commentaire" required/><?= htmlspecialchars($signComs['content'])?></textarea>
-					<button class="button modbutton">Modérer</button>
+					<input type="hidden" name="modCom" value="<?= $signComs['content'] ?>" />
+					<p> <?= $signComs['content']?> </p>
+					<button class="button modbutton">Valider</button>
 				</form>
 			</div>
 		</article>
