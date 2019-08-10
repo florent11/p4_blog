@@ -10,7 +10,6 @@
 		  <p><?= $billet['contenu'] ?></p>
 		</article>
 	</div>
-	<!-- <hr class="block-separator">-->
 	
 	<div class="wrapper">
 		<header class="box">
@@ -35,7 +34,7 @@
 			</form>
 		  </div>
 
-		  <p><?= htmlspecialchars($commentaire['contenu']) ?></p>
+		  <p><?= $commentaire['contenu'] ?></p>
 		</div>
 		<?php endforeach; ?>
 		<header class="box">
