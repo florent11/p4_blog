@@ -121,7 +121,7 @@ Header & Connexion
 	align-items:center;
 }
 
-#login input[type=text], input[type=password]
+#login input[type=text], input[type=password], input[type=text]
 {
 	height:30px;
 	width:30%;
