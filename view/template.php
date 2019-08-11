@@ -11,8 +11,16 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" integrity="sha256-39jKbsb/ty7s7+4WzbtELS4vq9udJ+MDjGTD5mtxHZ0=" crossorigin="anonymous" />
 		<!-- Tiny MCE -->
 		<script src="public/tinymce/js/tinymce/tinymce.min.js"></script>
-		<script>tinymce.init({selector:'textarea', entity_encoding : "raw"});</script>
+		<script>tinymce.init({selector:'textarea',
+		entity_encoding : "raw", 
+		setup: function (editor) {
+			editor.on('change', function () {
+				editor.save();
+			});
+		}
+		});</script>
 	</head>
+	
 	<body>
 		<div id="container">
 			<div id="header">
