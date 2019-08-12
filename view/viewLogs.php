@@ -13,7 +13,7 @@
 			</div>
 			<p>Auteur : <?= htmlspecialchars($historiqueEdit['author']) ?></p>
 			<p>Posté le <time><?= $historiqueEdit['post_date_fr'] ?></time></p>
-			<p>Commentaire :</p> <?= htmlspecialchars($historiqueEdit['oldcontent']) ?></p>
+			<p>Commentaire :</p> <?= $historiqueEdit['oldcontent'] ?></p>
 		</div>
 		<?php endforeach; ?>
 	</div>
@@ -28,7 +28,7 @@
 			</div>
 			<p>Auteur : <?= htmlspecialchars($historiqueDel['author']) ?>
 			<p>Posté le <time><?= $historiqueDel['post_date_fr'] ?></time></p>
-			<p>Commentaire : <?= htmlspecialchars($historiqueDel['oldcontent']) ?></p>
+			<p>Commentaire : <?= $historiqueDel['oldcontent'] ?></p>
 		</div>
 		<?php endforeach; ?>
 	</div>
