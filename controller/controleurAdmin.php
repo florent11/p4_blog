@@ -54,7 +54,6 @@ class controleurAdmin {
 			$vue->generer(array('billets' => $billets, 'commentaires' => $commentaires));
 		} else {
 			header('Location: index.php');
-			echo 'Mauvaise session';
 		}
 	}
 
@@ -80,20 +79,20 @@ class controleurAdmin {
     }
     
     public function displayAdmin($order="desc") {
-			$commentaires = $this->administration->getSignCom();
-			$commentnbr = $this->administration->countSignCom();
+		$commentaires = $this->administration->getSignCom();
+		$commentnbr = $this->administration->countSignCom();
 				
-			// Billets Croissant / Decroissant
-			$sortPost = "desc";
-			$_SESSION['sort'] = $order;
-			if($order == 'desc') {
-				$billets = $this->billet->getBillets('desc');
-				} else {
-				$billets = $this->billet->getBillets('asc');
-			}
-			// Generation vue.
-			$vue = new View("Admin");
-			$vue->generer(array('admin' => $_SESSION['userId'], 'billets' => $billets, 'commentaires' => $commentaires, 'signComNbr' => $commentnbr));
+		// Billets Croissant / Decroissant
+		$sortPost = "desc";
+		$_SESSION['sort'] = $order;
+		if($order == 'desc') {
+			$billets = $this->billet->getBillets('desc');
+			} else {
+			$billets = $this->billet->getBillets('asc');
+		}
+		// Generation vue.
+		$vue = new View("Admin");
+		$vue->generer(array('admin' => $_SESSION['userId'], 'billets' => $billets, 'commentaires' => $commentaires, 'signComNbr' => $commentnbr));
 	}
 	
 	

@@ -10,12 +10,12 @@ class ctrlAdminRegister {
 
    // Afficher formulaire d'inscription pour l'admin du blog
 	public function createFormView(){
-        $donnees=$this->registration->verifRegistration();
+       $donnees=$this->registration->verifRegistration();
         if ($donnees["nb"]!=0) {
             echo "Vos identifiants sont déjà inscrits dans la base de donnée. Connectez-vous à votre espace d'administration";
         }
 
-	    else { 
+	    else {
             $vue = new View("Registration");
             $vue->generer();
         }
@@ -28,9 +28,9 @@ class ctrlAdminRegister {
             echo "Vos identifiants sont déjà inscrits dans la base de donnée. Connectez-vous à votre espace d'administration";
         }
         else {
-        $pass=password_hash($pass, PASSWORD_ARGON2I);
-        $this->registration->ajoutIdAdmin($name, $pass);
-        echo "Vous êtes inscrit. Vous pouvez désormais vous connecter à votre espace d'administration.";
+            $pass=password_hash($pass, PASSWORD_ARGON2I);
+            $this->registration->ajoutIdAdmin($name, $pass);
+            echo "Vous êtes inscrit. Vous pouvez désormais vous connecter à votre espace d'administration.";
         }
     }   
 }

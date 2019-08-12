@@ -9,13 +9,13 @@ class Commentaire extends Model {
 		$sql = 'select COM_ID as id, DATE_FORMAT(COM_DATE, \'%d/%m/%Y à %Hh%imin%ss\') 
 		AS date_fr, COM_AUTEUR as auteur, COM_CONTENU as contenu, COM_SIGNALER as signaler from comments where BIL_ID=? ORDER BY id ASC';
 		$commentairest = $this->executerRequete($sql, array($idBillet));
-	return $commentairest;
+		return $commentairest;
     }
 
     public function countComments($idBillet) {
 		$sql = "select count(*) as nbcomments from comments where BIL_ID=?";
 		$commentNumber = $this->executerRequete($sql, array($idBillet));
-	return $commentNumber->fetch();
+		return $commentNumber->fetch();
 	}
   
 	// Ajouter un commentaire dans la base

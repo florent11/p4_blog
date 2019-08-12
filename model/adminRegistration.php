@@ -3,6 +3,7 @@
 require_once "model.php";
 
 class adminRegistration extends Model { 
+    
     //Insertion dans la base de données des identifiants définis par l'Admin
     public function ajoutIdAdmin($name, $pass) {
         $sql = "INSERT INTO members SET id_group=1, name = :nom, pass = :password";
