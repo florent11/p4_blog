@@ -1,8 +1,7 @@
 <?php
-
 session_start();
 
-require 'controller/Routeur.php';
+require 'core/routeur.php';
 
 $routeur = new Routeur();
 $routeur->routerRequete();
