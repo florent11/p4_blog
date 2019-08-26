@@ -3,9 +3,7 @@
 require_once "model.php";
 
 Class Admin extends Model 
-
 {
-
 	// Recuperation infos compte
 	public function getAccountInfo($username)
 	{
@@ -65,7 +63,7 @@ Class Admin extends Model
 	{
 		$sql = "select count(*) as nbsigncoms from comments where COM_SIGNALER = 1";
 		$commentSignNumber = $this->executerRequete($sql);
-	return $commentSignNumber->fetch();
+		return $commentSignNumber->fetch();
 	}
 	
 	// Modérer commentaire signalés
@@ -83,20 +81,20 @@ Class Admin extends Model
 	
 	// Insertion logs moderation
 	public function insertLogs($idCommentaire){
-		$sql ="INSERT INTO logs(com_id, com_date, com_author, com_content, post_id) 
+		$sql = "INSERT INTO logs(com_id, com_date, com_author, com_content, post_id) 
 				SELECT com_id, com_date, com_auteur, com_contenu, bil_id FROM comments WHERE com_id = ?";
 		$this->executerRequete($sql, array($idCommentaire));
 	} 
 	
 	// Insertion type "Supprimé" log Modération
 	public function insertLogsSupp($idCommentaire){
-		$sql ="UPDATE logs SET mod_type = 'deleted' WHERE com_id = ?";
+		$sql = "UPDATE logs SET mod_type = 'deleted' WHERE com_id = ?";
 		$this->executerRequete($sql, array($idCommentaire));
 	}
 
 	// Insertion type "Validé" log Modération
 	public function insertLogsMod($idCommentaire){
-		$sql ="UPDATE logs SET mod_type = 'validated' WHERE com_id = ?";
+		$sql = "UPDATE logs SET mod_type = 'validated' WHERE com_id = ?";
 		$this->executerRequete($sql, array($idCommentaire));
 	}
 	
@@ -120,6 +118,5 @@ Class Admin extends Model
 		$sql = "UPDATE posts SET bil_titre = ?, bil_contenu = ? WHERE bil_id = ?";
 		$this->executerRequete($sql, array($titreBillet, $contenuBillet, $idBillet));
 	}
-
 }
 
