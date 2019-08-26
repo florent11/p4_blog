@@ -12,7 +12,7 @@
 		<!-- Tiny MCE -->
 		<script src="public/tinymce/js/tinymce/tinymce.min.js"></script>
 		<script>tinymce.init({selector:'textarea',
-		entity_encoding : "raw", 
+		entity_encoding : "raw",
 		setup: function (editor) {
 			editor.on('change', function () {
 				editor.save();
@@ -22,44 +22,42 @@
 	</head>
 	
 	<body>
-		<div id="container">
-			<div id="header">
-				<div id="brand">
-					<a href="index.php">
-						<img id="logo" src="public/images/logo2.png" alt="Logo Blog" title="Logo Alaska" />
-					</a>
-					<h1 id="blogTitle"><a href="index.php">Billet simple pour l'Alaska</a></h1>
-				</div>
-					
-				<div id="login">
-					<?php
-					if(isset($_SESSION['userId'])){
-						echo '<p><a href="index.php?action=admin&sort=desc" class="button-connexion" id="logintext">Administration</a></p>
-							<a href="index.php?action=admin&sort=desc" class="fas fa-tasks button-connexion" id="loginlogo"></a>
-							<p><a href="index.php?action=deconnexion" class="button-connexion" id="logintext">Deconnexion</a></p>
-							<a href="index.php?action=deconnexion" class="fas fa-sign-out-alt button-connexion" id="loginlogo"></a>';
-					}else {
-						echo '<form method="POST" id="connexionAdmin" action="index.php?action=connexionAdmin">
-						<input type="text" name="username" placeholder="Identifiant" required/>
-						<input type="password" name="password" placeholder="Mot de passe" required/>
-						<input type="submit" class="button-connexion" id="logintext" value="Connexion">
-						</form>
-						<button class="button-connexion" id="loginlogo" form="connexionAdmin"><i class="fas fa-sign-in-alt"></i></button>';
-					}
-					?>
-				</div>
-					
+	<div id="container">
+		<header id="main">
+			<div id="brand">
+				<a href="index.php">
+					<img id="logo" src="public/images/logo2.png" alt="Logo Blog" title="Logo Alaska" />
+				</a>
+				<h1 id="blogTitle"><a href="index.php">Billet simple pour l'Alaska</a></h1>
 			</div>
+			
+			<div id="login">
+				<?php
+				if(isset($_SESSION['userId'])){
+					echo '<p><a href="index.php?action=admin&sort=desc" class="button-connexion" id="logintext">Administration</a></p>
+						<a href="index.php?action=admin&sort=desc" class="fas fa-tasks button-connexion" id="loginlogo"></a>
+						<p><a href="index.php?action=deconnexion" class="button-connexion" id="logintext">Deconnexion</a></p>
+						<a href="index.php?action=deconnexion" class="fas fa-sign-out-alt button-connexion" id="loginlogo"></a>';
+				}
+				else {
+					echo '<form method="POST" id="connexionAdmin" action="index.php?action=connexionAdmin">
+					<input type="text" name="username" placeholder="Identifiant" required/>
+					<input type="password" name="password" placeholder="Mot de passe" required/>
+					<input type="submit" class="button-connexion" id="logintext" value="Connexion">
+					</form>
+					<button class="button-connexion" id="loginlogo" form="connexionAdmin"><i class="fas fa-sign-in-alt"></i></button>';
+				}
+				?>
+			</div>
+		</header>			
+			
 				<?= $contenu ?> 
-			<footer>
-				Billet Simple pour l'Alaska, écrit par Jean Forteroche.
-			</footer>
-		</div>
-		<!-- jQuery -->
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-				integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			  	crossorigin="anonymous"></script>
+				
+		<footer>
+			Billet Simple pour l'Alaska, écrit par Jean Forteroche.
+		</footer>
+	</div>
 		<!-- JS -->
-		<script src="public/js/main.js"></script>
+		<script src="public/js/administration.js"></script> 
 	</body>
 </html>
