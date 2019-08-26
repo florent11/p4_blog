@@ -9,9 +9,9 @@ class Billet extends Model
 	{
 		if ($order == 'desc'){
 			$sql = 'SELECT * from posts order by bil_id desc';
-		} else {
+		} 
+		else {
 			$sql = 'SELECT * from posts order by bil_id asc';
-
 		}
 		$billets = $this->executerRequete($sql);
 		return $billets->fetchAll();
@@ -25,9 +25,9 @@ class Billet extends Model
 		
 		if($billet->rowCount() == 1) {
 			return $billet->fetch(); // Accès a la première ligne de resultat
-		} else {
+		} 
+		else {
 			throw new Exception("Aucun billet ne correspond à l'identifiant '$idBillet'");
 		}
-	}
-	
+	}	
 }

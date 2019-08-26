@@ -1,20 +1,21 @@
 <?php
-require_once 'view/viewClass.php';
+require_once 'core/viewClass.php';
 require_once 'model/adminRegistration.php';
 
-class ctrlAdminRegister {
-
-    public function __construct() {
+class ctrlAdminRegister 
+{
+    public function __construct() 
+    {
         $this->registration = new adminRegistration();
     }
 
    // Afficher formulaire d'inscription pour l'admin du blog
-	public function createFormView(){
+    public function createFormView()
+    {
        $donnees=$this->registration->verifRegistration();
         if ($donnees["nb"]!=0) {
             echo "Vos identifiants sont déjà inscrits dans la base de donnée. Connectez-vous à votre espace d'administration";
         }
-
 	    else {
             $vue = new View("Registration");
             $vue->generer();
@@ -22,7 +23,8 @@ class ctrlAdminRegister {
     }
 
     // Inscription de l'admin du blog
-    public function registration($name, $pass) { 
+    public function registration($name, $pass) 
+    { 
         $donnees=$this->registration->verifRegistration();
         if ($donnees["nb"]!=0) {
             echo "Vos identifiants sont déjà inscrits dans la base de donnée. Connectez-vous à votre espace d'administration";
