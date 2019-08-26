@@ -11,9 +11,9 @@
 		</div>
 		<div class="buttonRow boxsort">
 
-			<a href="index.php?action=admin&sort=desc" class="button">Plus Récent</a>
+			<a href="index.php?action=admin&sort=desc" class="button" id="recent">Plus Récent</a>
 			<hr>
-			<a href="index.php?action=admin&sort=asc" class="button">Plus Ancien</a>
+			<a href="index.php?action=admin&sort=asc" class="button" id="ancien">Plus Ancien</a>
 
 		</div>
 		
