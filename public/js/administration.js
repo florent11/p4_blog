@@ -25,7 +25,7 @@ var Administration = {
 			this.buttonRecent.style.color = "white";
 			this.buttonRecent.style.textShadow = "none";
 		}
-		else {
+		else if(this.url=="action=admin,sort=asc") {
 			this.buttonAncien.style.background = "#6f6f6f";
 			this.buttonAncien.style.color = "white";
 			this.buttonAncien.style.textShadow = "none";	
