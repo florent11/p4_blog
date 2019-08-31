@@ -425,8 +425,6 @@ Administration & Moderation
 	padding: 20px 20px;
 	width:45%;
 	max-width:900px;
-	height:100%;
-	overflow:auto;
 	background-color:#f6f6f6;
 	box-shadow: -2px 3px 3px 0px rgba(193,221,245,0.8);
 }
