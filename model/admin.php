@@ -74,26 +74,30 @@ Class Admin extends Model
 	}
 
 	// Supprimer commentaire signalé 
-	public function suppressCom($idCommentaire){
+	public function suppressCom($idCommentaire)
+	{
 		$sql = "DELETE FROM comments WHERE COM_ID = ?";
 		$this->executerRequete($sql, array($idCommentaire));
 	}
 	
 	// Insertion logs moderation
-	public function insertLogs($idCommentaire){
+	public function insertLogs($idCommentaire)
+	{
 		$sql = "INSERT INTO logs(com_id, com_date, com_author, com_content, post_id) 
 				SELECT com_id, com_date, com_auteur, com_contenu, bil_id FROM comments WHERE com_id = ?";
 		$this->executerRequete($sql, array($idCommentaire));
 	} 
 	
 	// Insertion type "Supprimé" log Modération
-	public function insertLogsSupp($idCommentaire){
+	public function insertLogsSupp($idCommentaire)
+	{
 		$sql = "UPDATE logs SET mod_type = 'deleted' WHERE com_id = ?";
 		$this->executerRequete($sql, array($idCommentaire));
 	}
 
 	// Insertion type "Validé" log Modération
-	public function insertLogsMod($idCommentaire){
+	public function insertLogsMod($idCommentaire)
+	{
 		$sql = "UPDATE logs SET mod_type = 'validated' WHERE com_id = ?";
 		$this->executerRequete($sql, array($idCommentaire));
 	}

@@ -26,7 +26,8 @@
 				<?php
 					if($commentaire['signaler'] == 1){
 						echo "<i class='signalinfo'>Ce contenu a déjà été signalé</i>";
-					} else {
+					} 
+					else{
 						echo '<button class="fas fa-exclamation-circle" title="Signaler le commentaire" ></button>';
 					};
 					?>
