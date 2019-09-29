@@ -6,10 +6,10 @@
 		<article class="billet box">
 			<header>
 				<a href="<?= "index.php?action=billet&id=" . $billet['bil_id'] ?>">
-					<h2 class="postTitle"><?= $billet['bil_titre'] ?></h1>
+					<h2 class="postTitle"><?= $billet['bil_titre'] ?></h2>
 				</a>
 				<div class="timeinfo">
-					<time><i>Le <?= $billet['bil_date'] ?></i></time>
+					<p class="time">Le <?= $billet['date_fr'] ?></p>
 				</div>
 			</header>
 			<div class="wrapper">
@@ -18,5 +18,4 @@
 		</article>
 	</div>
 	<?php endforeach; ?>
-
 </div>
