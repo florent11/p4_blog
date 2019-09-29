@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  Dim 11 août 2019 à 06:45
+-- Généré le :  jeu. 22 août 2019 à 07:54
 -- Version du serveur :  5.7.25
 -- Version de PHP :  7.3.1
 
@@ -26,7 +26,7 @@ CREATE TABLE `comments` (
   `com_auteur` varchar(100) NOT NULL,
   `com_contenu` varchar(500) NOT NULL,
   `com_signaler` tinyint(1) DEFAULT '0',
-  `com_modere` tinyint(4) NOT NULL DEFAULT '0',
+  `com_modere` tinyint(1) NOT NULL DEFAULT '0',
   `bil_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -43,7 +43,8 @@ INSERT INTO `comments` (`com_id`, `com_date`, `com_auteur`, `com_contenu`, `com_
 (24, '2019-08-11 08:11:47', 'quentin66', '<p>Pour un livre gratuit, il est super. Vivement la version papier                        </p>', 0, 0, 51),
 (25, '2019-08-11 08:12:55', 'GilbertB', '<p>Désolé je n\'aime pas du tout cet écrivain...                        </p>', 0, 0, 51),
 (26, '2019-08-11 08:14:50', 'Florie78', '<p>Mr Forteroche, j\'adore vos livres, je les ai tous lus. Continuez à écrire et à poursuivre votre passion pour les voyages !</p>', 0, 0, 51),
-(27, '2019-08-11 08:19:22', 'steven08', '<p>Beaucoup de suspenses. Vous savez interpeller vos lecteurs qui sont impatients de lire les prochains épisodes.</p>', 0, 0, 50);
+(27, '2019-08-11 08:19:22', 'steven08', '<p>Beaucoup de suspenses. Vous savez interpeller vos lecteurs qui sont impatients de lire les prochains épisodes.</p>', 0, 0, 50),
+(36, '2019-08-20 16:34:12', 'ddddd', '<p>ddddd</p>', 0, 1, 51);
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,20 @@ CREATE TABLE `logs` (
   `post_id` int(11) NOT NULL,
   `mod_type` enum('deleted','validated') DEFAULT NULL,
   `log_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `logs`
+--
+
+INSERT INTO `logs` (`log_id`, `com_id`, `com_date`, `com_author`, `com_content`, `post_id`, `mod_type`, `log_date`) VALUES
+(135, 34, '2019-08-13 18:40:18', 'Florent', '<p>ceci est un commentaire test</p>', 51, 'deleted', '2019-08-13 18:43:46'),
+(136, 35, '2019-08-13 18:40:37', 'Florent', '<p>test 2</p>', 51, 'deleted', '2019-08-13 18:43:49'),
+(137, 35, '2019-08-13 18:40:37', 'Florent', '<p>test 2</p>', 51, 'deleted', '2019-08-13 19:04:08'),
+(138, 35, '2019-08-13 18:40:37', 'Florent', '<p>test 2</p>', 51, 'deleted', '2019-08-20 16:33:09'),
+(139, 35, '2019-08-13 18:40:37', 'Florent', '<p>test 2</p>', 51, 'deleted', '2019-08-20 16:33:34'),
+(140, 35, '2019-08-13 18:40:37', 'Florent', '<p>test 2</p>', 51, 'deleted', '2019-08-20 16:33:47'),
+(141, 36, '2019-08-20 16:34:12', 'ddddd', '<p>ddddd</p>', 51, 'validated', '2019-08-20 16:34:19');
 
 -- --------------------------------------------------------
 
@@ -133,7 +147,8 @@ INSERT INTO `posts` (`bil_id`, `bil_date`, `bil_titre`, `bil_contenu`, `auteur_i
 -- Index pour la table `comments`
 --
 ALTER TABLE `comments`
-  ADD PRIMARY KEY (`com_id`);
+  ADD PRIMARY KEY (`com_id`),
+  ADD KEY `bil_id` (`bil_id`);
 
 --
 -- Index pour la table `groupes`
@@ -168,7 +183,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT pour la table `groupes`
@@ -180,7 +195,7 @@ ALTER TABLE `groupes`
 -- AUTO_INCREMENT pour la table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `log_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT pour la table `members`
@@ -192,11 +207,17 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `bil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `bil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`bil_id`) REFERENCES `posts` (`bil_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `posts`
