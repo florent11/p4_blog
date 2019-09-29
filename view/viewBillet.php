@@ -3,9 +3,10 @@
 <div id="wrapper-home">
 	<div class="wrapper">
 		<article class="billet box">
+		<a href="index.php" class="fas fa-angle-left retour-accueil"> Retour Accueil</a>
 		  <header>
 			<h1 class="postTitle"><?= $billet['titre'] ?></h1>
-			<time><i>Le <?= $billet['date_fr'] ?></i></time>
+			<p class="time">Le <?= $billet['date_fr'] ?></p>
 		  </header>
 		  <p><?= $billet['contenu'] ?></p>
 		</article>
@@ -24,13 +25,16 @@
 				<input type="hidden" name="idCom" value="<?= $commentaire['id'] ?>" />
 				<div class="signaler">
 				<?php
-					if($commentaire['signaler'] == 1){
+					if($commentaire['com_modere'] == 1){
+						echo "<i class='signalinfo'>Ce contenu a déjà été modéré</i>";
+                    }
+					else if($commentaire['signaler'] == 1){
 						echo "<i class='signalinfo'>Ce contenu a déjà été signalé</i>";
 					} 
 					else{
 						echo '<button class="fas fa-exclamation-circle" title="Signaler le commentaire" ></button>';
 					};
-					?>
+				?>
 				</div>
 			</form>
 		  </div>
@@ -48,7 +52,7 @@
 				<input type="hidden" name="id" value="<?= $billet['id'] ?>" />
 			</div>
 			<div class="form-bloc">
-				<input type="submit" class="button submit" value="Poster" />
+				<input type="submit" class="button submit" id="postcom" value="Poster" />
 			</div>
 		</form>
 	</div>
