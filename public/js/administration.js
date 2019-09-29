@@ -59,5 +59,5 @@ class Administration
 	}
 }
 
-const administration = new Administration();
+const administration = new Administration();  // Création d'une instance de la classe "Administration"
 administration.activerEvents();  // Appel de la méthode "Gestion des évènements"			

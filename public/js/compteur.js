@@ -2,9 +2,10 @@ class Compteur
 {
     constructor() 
     {
-      this.secondes = 6;
+      this.secondes = 6;  // Attribut qui défini le chiffre de départ du compteur décroissant
     }
 
+    // Méthode qui gère le fonctionnement du compteur
     compteurStart() 
     {
        var secondes = this.secondes;
@@ -20,5 +21,5 @@ class Compteur
     }
 }
 
-const compteur = new Compteur();
-compteur.compteurStart();
+const compteur = new Compteur();  // Création d'une instance de la classe "Compteur"
+compteur.compteurStart();  // Appel de la méthode "compteurStart"
