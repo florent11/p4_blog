@@ -31,7 +31,7 @@ class controleurBillet
 		$this->commentaire->ajouterCommentaire($auteur, $contenu, $idBillet);
 		$vue = new View("ComPosted");
 		$vue->generer();
-		header ("Refresh: 5;URL=index.php?action=billet&id=" . $idBillet);
+		header ("Refresh: 6;URL=index.php?action=billet&id=" . $idBillet);
 	}
 	
 	// Signaler un commentaire
