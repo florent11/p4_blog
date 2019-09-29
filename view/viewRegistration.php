@@ -1,3 +1,5 @@
+<?php $this->titre = "Blog Alaska - Inscription"; ?>
+
 <div id="wrapper-home">
 	<h2>Inscription de l'administrateur du blog</h2>
     	<form method="POST" action="index.php?action=adminregistration" id="registration_form">

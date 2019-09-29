@@ -12,12 +12,12 @@ class controleurAccueil
     $this->billet = new Billet();
   }
 
-    // Affiche la liste de tous les billets du blog
-    public function accueil() 
-    {
-        $billets = $this->billet->getBillets();
-        $vue = new View("Home");
-        $vue->generer(array('billets' => $billets));
-    }
+  // Affiche la liste de tous les billets du blog
+  public function accueil() 
+  {
+    $billets = $this->billet->getBillets();
+    $vue = new View("Home");
+    $vue->generer(array('billets' => $billets));
+  }
 }
     
