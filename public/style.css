@@ -37,10 +37,9 @@ h1, h2, h3
 	text-align:center;
 }
 
-time
+.time
 {
 	font-style:italic;
-	text-align:center;
 }
 
 /* 
@@ -182,6 +181,7 @@ Containers
 	margin:auto;
 	display:flex;
 	flex-direction:row;
+	flex-wrap: wrap;
 	justify-content:space-between;
 	width:90%;
 	background-color:#e5e5e5;
@@ -214,7 +214,7 @@ Containers
 	margin:auto;
 	background-color:#FFFDFF;
 	text-align:center;
-	line-height:45px;
+	line-height:20px;
 	margin-bottom:495px; /*40px*/
 }
 
@@ -234,6 +234,25 @@ Posts & Comments
 	padding: 20px 20px 10px;
 }
 
+.retour-accueil
+{
+	background-color: #ebebeb;
+	border-radius: 6px;
+	border: 1px solid #bfbfbf;
+	display: inline-block;
+	cursor: pointer;
+	color: #000000;
+	font-size: 0.8em;
+	font-weight: bold;
+	padding: 4px 3px;
+	text-decoration: none;
+	text-shadow: 0px -1px 0px #e0dfeb;
+}
+
+.retour-accueil:hover
+{
+	background-color: #d2d2d2;
+}
 
 #commentform
 {
@@ -261,6 +280,7 @@ Posts & Comments
 {
 	width:100px;
 	margin:auto;
+	margin-top:13px;
 }
 
 #commentform input[type=text]
@@ -447,11 +467,20 @@ Administration & Moderation
 	flex-direction:column;
 }
 
+#validcom
+{
+    width: 45%;
+    max-width: 900px;
+    padding: 20px 20px;
+    background-color: #f6f6f6;
+    box-shadow: 2px 3px 3px 0px rgba(193,221,245,0.8);
+}
+
 #moderation
 {
-	height:100%;
 	width:45%;
 	max-width:900px;
+	margin-top:30px;
 	padding: 20px 20px;
 	background-color:#f6f6f6;
 	box-shadow: 2px 3px 3px 0px rgba(193,221,245,0.8);
@@ -463,13 +492,13 @@ Administration & Moderation
 	display:inline-block;
 }
 
-.modComInfo
+.modcominfo
 {
-	line-height:40px;
+	line-height:30px;
 	position:relative;
 }
 
-.modComInfo p
+.modcominfo p
 {
 	margin:0px;
 }
@@ -483,9 +512,10 @@ Administration & Moderation
 	align-items:center;
 }
 
-.editstatus
+.editstatus, .comstatus
 {
 	text-align:center;
+	text-decoration: underline;
 }
 
 .adminbillet
@@ -512,8 +542,6 @@ Administration & Moderation
 
 .editform
 {
-	display:flex;
-	flex-direction:row;
 	justify-content:space-between;
 	align-items:center;
 	padding:20px 20px;
@@ -530,9 +558,7 @@ Administration & Moderation
 
 .modbutton
 {
-	margin:25px 20px;
 	height:30px;
-	width:150px;
 }
 
 .buttonRow
@@ -680,8 +706,8 @@ Logos, Icons
 .crosscom
 {
 	position:absolute;
-	top:10px;
-	left:92%;
+	top:0%;
+	left:93%;
 }
 
 
@@ -744,7 +770,7 @@ Media Queries
 
 #wrapper-admin
 {
-	width:100%;
+	width:95%;
 }
 
 .moderationstatus
@@ -761,12 +787,6 @@ Media Queries
 {
 	flex-direction:column;
 }
-
-.form-bloc
-{
-	width:50%;
-}
-
 
 }
 
@@ -790,6 +810,12 @@ Media Queries
 	margin:auto;
 	width:60%;
 }
+
+#validcom
+{
+	margin:auto;
+	width:60%;
+}
 	
 .editform
 {
@@ -806,6 +832,7 @@ Media Queries
 #container
 {
 	background-color:#F6F6F6;
+	width:99%;
 }
 
 .postTitle 
@@ -835,10 +862,16 @@ Media Queries
 	padding-top:0px;
 }
 
+#validcom
+{
+	width:80%;
+	padding-top:0px;
+}
+
 
 #wrapper-home
 {
-	width:100%;
+	width:95%;
 }
 
 #wrapper-logs
@@ -892,6 +925,11 @@ header
 /* Small devices */
 @media screen and (max-width: 600px)
 {
+
+h1
+{
+	font-size:1.3em;
+}
 	
 h3
 {
@@ -924,7 +962,8 @@ header
 .buttonRow {
     display: flex;
     text-decoration: none;
-    padding: 20px 0px;
+	padding: 20px 0px;
+	font-size:0.8em;
 }
 
 .button {
@@ -936,9 +975,16 @@ header
 .wrapper
 {
 	padding: 10px 0px 10px;
+	font-size:0.9em;
 }
 
 #admin
+{
+	width:100%;
+	padding:0px;
+}
+
+#validcom
 {
 	width:100%;
 	padding:0px;
@@ -952,13 +998,13 @@ header
 
 .moderationstatus
 {
-	font-size:1em;
+	font-size:0.7em;
 }
 
 .comment
 {
 	padding:10px 5px;
-	width:100%;
+	font-size:0.7em;	
 }
 
 .commentInfo
@@ -990,7 +1036,7 @@ header
 
 #editwrapper, #deletewrapper
 {
-	width:100%;
+	width:85%;
 	max-height:100%;
 }
 
@@ -1015,8 +1061,7 @@ footer
 {
 	height:20px;
 	line-height:20px;
+	font-size:0.8em;
 }
 
 }
-
-
