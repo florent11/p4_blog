@@ -5,7 +5,7 @@ class Compteur
       this.secondes = 6;
     }
 
-   compteurStart() 
+    compteurStart() 
     {
        var secondes = this.secondes;
        setInterval(function(){
