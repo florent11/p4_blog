@@ -13,8 +13,9 @@ class ctrlAdminRegister
     public function createFormView()
     {
        $donnees=$this->registration->verifRegistration();
-        if ($donnees["nb"]!=0) {
-            echo "Vos identifiants sont déjà inscrits dans la base de donnée. Connectez-vous à votre espace d'administration";
+        if ($donnees["nb"]!=0){
+            $vue = new View("ErrorRegistration");
+            $vue->generer();
         }
 	    else {
             $vue = new View("Registration");
@@ -26,13 +27,15 @@ class ctrlAdminRegister
     public function registration($name, $pass) 
     { 
         $donnees=$this->registration->verifRegistration();
-        if ($donnees["nb"]!=0) {
-            echo "Vos identifiants sont déjà inscrits dans la base de donnée. Connectez-vous à votre espace d'administration";
+        if ($donnees["nb"]!=0){
+           $vue = new View("ErrorRegistration");
+           $vue->generer();
         }
         else {
             $pass=password_hash($pass, PASSWORD_ARGON2I);
             $this->registration->ajoutIdAdmin($name, $pass);
-            echo "Vous êtes inscrit. Vous pouvez désormais vous connecter à votre espace d'administration.";
+            $vue = new View("ConfirmRegistration");
+            $vue->generer();
         }
     }   
 }
