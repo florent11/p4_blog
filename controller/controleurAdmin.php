@@ -47,7 +47,7 @@ class controleurAdmin
 		$_SESSION['sort'] = $order;
 		if($order == 'desc') {
 			$billets = $this->billet->getBillets('desc');
-			} 
+		} 
 			else {
 			$billets = $this->billet->getBillets('asc');
 		}
