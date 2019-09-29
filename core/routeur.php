@@ -1,11 +1,11 @@
 <?php
 
 require_once 'controller/controleurAccueil.php'; 
-require_once 'controller/controllerBillet.php';
+require_once 'controller/controleurBillet.php';
 require_once 'controller/controleurAdmin.php';
 require_once 'controller/ctrlAdminRegister.php'; 
+require_once 'controller/controleurErreur.php'; 
 require_once 'viewClass.php';
-
 
 class Routeur 
 {
@@ -13,6 +13,7 @@ class Routeur
 	private $ctrlBillet;
 	private $ctrlAdmin;
 	private $ctrlAdminRegister;
+	private $ctrlErreur;
 
 	public function __construct() 
 	{
@@ -20,6 +21,7 @@ class Routeur
 		$this->ctrlBillet = new controleurBillet();
 		$this->ctrlAdmin = new controleurAdmin();
 		$this->ctrlAdminRegister = new ctrlAdminRegister();
+		$this->ctrlErreur = new controleurErreur();
 	}
 
 	// Traite une requête entrante
@@ -39,103 +41,145 @@ class Routeur
 						}
 						break;
 				
-						case 'commenter':
-							$auteur = $this->getParametre($_POST, 'auteur');
-							$contenu = $this->getParametre($_POST, 'contenu');
-							$idBillet = $this->getParametre($_POST, 'id');
-							$this->ctrlBillet->commenter($auteur, $contenu, $idBillet);
+					case 'commenter':
+						$auteur = $this->getParametre($_POST, 'auteur');
+						$contenu = $this->getParametre($_POST, 'contenu');
+						$idBillet = $this->getParametre($_POST, 'id');
+						$this->ctrlBillet->commenter($auteur, $contenu, $idBillet);
 						break;
 							
-						case 'signaler':
-							$idBillet = $this->getParametre($_POST, 'idBillet');
-							$idCom = $this->getParametre($_POST, 'idCom');
-							$this->ctrlBillet->signaler($idBillet, $idCom);
+					case 'signaler':
+						$idBillet = $this->getParametre($_POST, 'idBillet');
+						$idCom = $this->getParametre($_POST, 'idCom');
+						$this->ctrlBillet->signaler($idBillet, $idCom);
 						break;
 						
-						case 'deconnexion':
-							$this->ctrlAdmin->deconnexion();
+					case 'deconnexion':
+						$this->ctrlAdmin->deconnexion();
 						break;
 
-						case 'connexion':
-							$this->ctrlAdmin->connexion();
-						break;
-						
-						case 'admin':
-						if(isset($_GET['sort'])) {
-							$order = $this->getParametre($_GET, 'sort');
-						} 
-						else {
-							$order = "desc";
-						}
-						$this->ctrlAdmin->displayAdmin($order);
-						break;
-						
-						case 'connexionAdmin':
+					case 'admin':
+						if($connexion == false){
 							$connexion = $this->ctrlAdmin->connexionAdmin();
-							 if($connexion){
-								$order = "desc";
-								$this->ctrlAdmin->displayAdmin($order);
-							} 
+						}
+						if($_SESSION['username']){
+							if(isset($_GET["sort"])) {
+								$order = $this->getParametre($_GET, 'sort');
+							}
 							else {
-								throw new Exception("Erreur de connexion");
-							}	
+								$order = "desc";
+							}
+							$this->ctrlAdmin->displayAdmin($order);
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
 						break;
 						
-						case 'creer':
+					case 'create':
+						if($_SESSION['username']){
+							$this->ctrlAdmin->createView();
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
+						break;	
+
+					case 'creer':
+						if($_SESSION['username']){
 							$titreBillet = $this->getParametre($_POST, 'title');
 							$contenuBillet = $this->getParametre($_POST, 'content');
 							$this->ctrlAdmin->create($titreBillet, $contenuBillet);
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
 						break;
 						
-						case 'supprimer':
+					case 'supprimer':
+						if($_SESSION['username']){
 							$idBillet = $this->getParametre($_GET, 'id');
 							$this->ctrlAdmin->suppress($idBillet);
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
 						break;
 						
-						case 'vueModifier':
+					case 'vueModifier':
+						if($_SESSION['username']){
 							$idBillet = $this->getParametre($_GET, 'id');
 							$this->ctrlAdmin->updateView($idBillet);
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
 						break;
 						
-						case 'create':
-							$this->ctrlAdmin->createView();
-						break;
-						
-						case 'logs':
-							$this->ctrlAdmin->logsView();
-						break;
-						
-						case 'modifier':
+					case 'modifier':
+						if($_SESSION['username']){					
 							$idBillet = $this->getParametre($_GET, 'id');
 							$titreBillet = $this->getParametre($_POST, 'title');
 							$contenuBillet = $this->getParametre($_POST, 'content');
 							$this->ctrlAdmin->update($idBillet, $titreBillet, $contenuBillet);
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
+						break;
+					
+					case 'validComment':
+						if($_SESSION['username']){
+							$idCom = $this->getParametre($_POST, 'cid');
+							$this->ctrlAdmin->validComment($idCom);
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
 						break;
 						
-						case 'moderer':
+					case 'moderer':
+						if($_SESSION['username']){
 							$idCom = $this->getParametre($_POST, 'cid');
 							$modCom = $this->getParametre($_POST, 'modCom');
 							$this->ctrlAdmin->moderateCom($modCom, $idCom);
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
 						break;
 						
-						case 'suppresscom':
+					case 'suppresscom':
+						if($_SESSION['username']){
 							$idCom = $this->getParametre($_GET, 'id');
 							$this->ctrlAdmin->suppressCom($idCom);
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
 						break;
 
-						case 'registration':
+					case 'logs':
+						if($_SESSION['username']){
+							$this->ctrlAdmin->logsView();
+						}
+						else {
+							throw new Exception("Administrateur non connecté");
+						}
+						break;
+						
+					case 'registration':
 							$this->ctrlAdminRegister->createFormView();
-
 						break;
 
-						case 'adminregistration':
+					case 'adminregistration':
 							$name = $this->getParametre($_POST, 'nom');
 							$pass = $this->getParametre($_POST, 'password');
 							$this->ctrlAdminRegister->registration($name, $pass);
 						break;
 	
-						default:
-							throw new Exception("Action non valide");
+					default:
+						throw new Exception("Action non valide");
 				}
 			}
 			else { // Aucune action definie : affichage de l'accueil
@@ -143,24 +187,18 @@ class Routeur
 			}
 		}
 			catch (Exception $e) {
-				$this->erreur($e->getMessage());
+				$this->ctrlErreur->erreur($e->getMessage());
 			}
 		}
-
-	// Affiche une erreur
-	private function erreur($msgErreur) 
-	{
-		$vue = new View("Error");
-		$vue->generer(array('msgErreur' => $msgErreur));
-	}
-	  
+		
 	// Recherche un paramètre dans un tableau
 	private function getParametre($tableau, $nom) 
 	{
 		if (isset($tableau[$nom])) {
 			return $tableau[$nom];
 		} 
-		else
+		else {
 			throw new Exception("Parametre '$nom' absent");
+		}	
 	}
 }
