@@ -16,7 +16,7 @@ class Commentaire extends Model
 	//Affiche le nombre de commentaires associés au billet
 	public function countComments($idBillet) 
 	{
-		$sql = 'select count(*) as nbcomments from comments where bil_id = ?';
+		$sql = 'select count(*) as nbcomments from comments where com_a_valider = 1 and bil_id = ?';
 		$commentNumber = $this->executerRequete($sql, array($idBillet));
 		return $commentNumber->fetch();
 	}
