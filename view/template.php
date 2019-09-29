@@ -11,23 +11,24 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" integrity="sha256-39jKbsb/ty7s7+4WzbtELS4vq9udJ+MDjGTD5mtxHZ0=" crossorigin="anonymous" />
 		<!-- Tiny MCE -->
 		<script src="public/tinymce/js/tinymce/tinymce.min.js"></script>
-		<script>tinymce.init({selector:'textarea', width :'100%',
-		entity_encoding : "raw",
-		setup: function (editor) {
-			editor.on('change', function () {
-				editor.save();
+		<script>tinymce.init({selector:'textarea', width :'100%', entity_encoding : "raw", 
+				forced_root_block : false,
+				force_br_newlines : true,
+				force_p_newlines : false,
+				setup: function (editor) {
+					editor.on('change', function () {
+						editor.save();
+					});
+				}
 			});
-		}
-		});</script>
+		</script>
 	</head>
 	
 	<body>
 	<div id="container">
 		<header id="main">
 			<div id="brand">
-				<a href="index.php">
-					<img id="logo" src="public/images/logo2.png" alt="Logo Blog" title="Logo Alaska" />
-				</a>
+				<a href="index.php"><img id="logo" src="public/images/logo2.png" alt="Logo Blog" title="Logo Alaska" /></a>
 				<h1 id="blogTitle"><a href="index.php">Billet simple pour l'Alaska</a></h1>
 			</div>
 			
@@ -40,7 +41,7 @@
 						<a href="index.php?action=deconnexion" class="fas fa-sign-out-alt button-connexion" id="loginlogo"></a>';
 				}
 				else {
-					echo '<form method="POST" id="connexionAdmin" action="index.php?action=connexionAdmin">
+					echo '<form method="POST" id="connexionAdmin" action="index.php?action=admin">
 					<input type="text" name="username" placeholder="Identifiant" required/>
 					<input type="password" name="password" placeholder="Mot de passe" required/>
 					<input type="submit" class="button-connexion" id="logintext" value="Connexion">
@@ -58,6 +59,6 @@
 		</footer>
 	</div>
 		<!-- JS -->
-		<script src="public/js/administration.js"></script> 
+		<script src="public/js/administration.js"></script>
 	</body>
 </html>
