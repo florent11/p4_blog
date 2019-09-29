@@ -8,10 +8,10 @@ class Billet extends Model
 	public function getBillets($order = 'desc')
 	{
 		if ($order == 'desc'){
-			$sql = 'SELECT * from posts order by bil_id desc';
+			$sql = 'select bil_id, date_format(bil_date, \'%d/%m/%Y à %H:%i:%s\') as date_fr, bil_titre, bil_contenu from posts order by bil_id desc';
 		} 
 		else {
-			$sql = 'SELECT * from posts order by bil_id asc';
+			$sql = 'select bil_id, date_format(bil_date, \'%d/%m/%Y à %H:%i:%s\') as date_fr, bil_titre, bil_contenu from posts order by bil_id asc';
 		}
 		$billets = $this->executerRequete($sql);
 		return $billets->fetchAll();
@@ -20,11 +20,11 @@ class Billet extends Model
 	// Renvoie les infos sur un billet
 	public function getBillet($idBillet)
 	{
-		$sql = 'select BIL_ID as id, DATE_FORMAT(BIL_DATE, \'%d/%m/%Y à %H:%i:%s\') as date_fr, BIL_TITRE as titre, BIL_CONTENU as contenu FROM posts where BIL_ID=?';
+		$sql = 'select bil_id as id, date_format(bil_date, \'%d/%m/%Y à %H:%i:%s\') as date_fr, bil_titre as titre, bil_contenu as contenu from posts where bil_id = ?';
 		$billet = $this->executerRequete($sql, array($idBillet));
 		
 		if($billet->rowCount() == 1) {
-			return $billet->fetch(); // Accès a la première ligne de resultat
+			return $billet->fetch(); // Accès à la première ligne de resultat
 		} 
 		else {
 			throw new Exception("Aucun billet ne correspond à l'identifiant '$idBillet'");
