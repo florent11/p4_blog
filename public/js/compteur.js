@@ -12,7 +12,7 @@ class Compteur
             secondes--;
             console.log(secondes);
             document.getElementById("compteur").innerHTML = "Redirection vers la page du billet dans 0" + secondes + " secondes";
-            
+
             if (secondes == 1) {
                 clearInterval(); 
             }
