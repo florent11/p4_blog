@@ -187,7 +187,7 @@ class Routeur
 			}
 		}
 			catch (Exception $e) {
-				$this->ctrlErreur->erreur(utf8_decode($e->getMessage()));
+				$this->ctrlErreur->erreur($e->getMessage());
 			}
 		}
 		
